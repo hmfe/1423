@@ -9,7 +9,7 @@ class Searcher extends Component {
     result: [],
     lastquery: "",
     minChars: 1,
-    active: false
+    inputActive: false
   };
 
   async componentDidMount() {
@@ -71,12 +71,12 @@ class Searcher extends Component {
 
   handleChange = e => {
 
-    if(e.target.value == ' ')
+    if(e.target.value === ' ')
     {
         e.target.value = '';
         return false;
     }
-    this.setState({ active: true, lastquery: e.target.value });
+    this.setState({ inputActive: true, lastquery: e.target.value });
 
     if (e.target.value.length >= this.state.minChars) {
       this.resetTimer(200, e.target.value);
@@ -87,7 +87,7 @@ class Searcher extends Component {
   };
 
   handleBlur = e => {
-    this.setState({ active: false });
+    this.setState({ inputActive: false });
   };
 
   resetTimer(ms, inputString) {
@@ -106,17 +106,17 @@ class Searcher extends Component {
     if (error) {
       return <div>Sorry, search is not possible: {error.message}</div>;
     } else {
-      if (!this.state.active) {
-        return (
-          <Fragment>
-            <input onFocus={this.handleChange} onBlur={this.handleBlur}  />
-          </Fragment>
-        );
-      }
+    //   if (!this.state.inputActive) {
+    //     return (
+    //       <Fragment>
+    //         <input onFocus={this.handleChange} onBlur={this.handleBlur}  />
+    //       </Fragment>
+    //     );
+    //   }
       return (
         <Fragment>
-          <input onChange={this.handleChange} onBlur={this.handleBlur} />
-          <SearchResult query={lastquery} minChars={minChars} result={result} />
+          <input onChange={this.handleChange} list="json-datalist" onBlur={this.handleBlur} />
+          <SearchResult query={lastquery} refId="json-datalist" minChars={minChars} result={result} />
         </Fragment>
       );
     }

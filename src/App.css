@@ -1,3 +1,11 @@
 .App {
   text-align: center;
 }
+
+.list-suggestions {
+  border: solid 1px grey;
+  width: 400px;
+}
+.list-item {
+  color: red;
+}
