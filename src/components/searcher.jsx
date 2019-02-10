@@ -14,7 +14,7 @@ class Searcher extends Component {
 
   async componentDidMount() {
     const apiKey = "c857fccf3354f1ca866dc08a04b4be34";
-    this.url = "https://api.themoviedb.org/3/search/movie?api_key=" + apiKey;
+    this.url = "https://api.themoviedb.org/4/search/movie?api_key=" + apiKey;
     await this.getSearch("testquery");
   }
 
@@ -39,8 +39,7 @@ class Searcher extends Component {
 
   async getSearch(query) {
     try {
-      let data = await this.getJson(this.url + "&query=" + query);
-    console.log(data);
+      let data = await this.getJson(this.url + "&query=" + query + "&include_adult=false&sort_by=title.asc");
     
       const r =
         query === "testquery"
