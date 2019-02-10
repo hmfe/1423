@@ -8,7 +8,7 @@ class Searcher extends Component {
     isLoaded: false,
     result: [],
     lastquery: "",
-    minChars: 2,
+    minChars: 1,
     active: false
   };
 
@@ -18,16 +18,30 @@ class Searcher extends Component {
     await this.getSearch("testquery");
   }
 
-  extractDetails(arr) {
-    return arr.map(pos => {
-      const { id, title, release_date } = pos;
-      return { id: id, title: title, extra: release_date };
-    });
-  }
+    extractDetails(arr) {
+        
+        let filtered = this.filterRegMatch(arr);
+        
+        return filtered.map( pos => {
+            const { id, title, release_date } = pos;
+            return { id: id, title: title, extra: release_date };
+        });
+    }
+
+    filterRegMatch(arr) {
+        let { lastquery } = this.state;
+        let regex = new RegExp(`\\b^${lastquery}`, 'gi');
+        let filtered = arr.filter(function (pos) {
+            return regex.test(pos.title);
+        });
+        return filtered;
+    }
+
   async getSearch(query) {
     try {
       let data = await this.getJson(this.url + "&query=" + query);
-
+    console.log(data);
+    
       const r =
         query === "testquery"
           ? { isLoaded: true }
@@ -57,10 +71,15 @@ class Searcher extends Component {
   }
 
   handleChange = e => {
-    this.setState({ active: true });
-    this.setState({ lastquery: e.target.value });
 
-    if (e.target.value.length > this.state.minChars) {
+    if(e.target.value == ' ')
+    {
+        e.target.value = '';
+        return false;
+    }
+    this.setState({ active: true, lastquery: e.target.value });
+
+    if (e.target.value.length >= this.state.minChars) {
       this.resetTimer(200, e.target.value);
     } else {
       clearTimeout(this.searchTimeout);

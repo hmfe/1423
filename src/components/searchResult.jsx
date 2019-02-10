@@ -12,7 +12,7 @@ const SearchResult = (props) => {
     const None = () => <div>Sorry no matches..</div>;
     const MoreChars = () => <div>More chars plz...</div>;
       
-    if (props.query.length <= props.minChars) return <MoreChars />
+    if (props.query.length < props.minChars) return <MoreChars />
     else{
         return  !props.result.length && props.query.length>props.minChars+1? <None />:<Multi />
     }
