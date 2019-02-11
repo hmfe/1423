@@ -9,7 +9,8 @@ class Searcher extends Component {
     result: [],
     lastquery: "",
     minChars: 1,
-    inputActive: false
+    inputActive: false,
+    focusDD: false
   };
 
   async componentDidMount() {
@@ -70,7 +71,7 @@ class Searcher extends Component {
   }
 
   handleChange = e => {
-
+    // console.log(document.getElementById("list-suggestions"))
     if(e.target.value === ' ')
     {
         e.target.value = '';
@@ -87,6 +88,8 @@ class Searcher extends Component {
   };
 
   handleBlur = e => {
+    // document.getElementById("list-suggestions").focus();
+   
     this.setState({ inputActive: false });
   };
 
@@ -101,7 +104,7 @@ class Searcher extends Component {
 
   render() {
     // console.log("** render() **");
-    const { error, result, lastquery, minChars } = this.state;
+    const { error, result, lastquery, minChars, focusDD } = this.state;
 
     if (error) {
       return <div>Sorry, search is not possible: {error.message}</div>;
@@ -115,8 +118,8 @@ class Searcher extends Component {
     //   }
       return (
         <Fragment>
-          <input onChange={this.handleChange} list="json-datalist" onBlur={this.handleBlur} />
-          <SearchResult query={lastquery} refId="json-datalist" minChars={minChars} result={result} />
+          <input onChange={this.handleChange} onBlur={this.handleBlur} />
+          <SearchResult query={lastquery} minChars={minChars} result={result} focus={focusDD}  />
         </Fragment>
       );
     }

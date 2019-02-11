@@ -1,10 +1,10 @@
-.App {
-  text-align: center;
+input  { width: 400px;
 }
 
-.list-suggestions {
+#list-suggestions {
   border: solid 1px grey;
   width: 400px;
+  display: block;
 }
 .list-item {
   color: red;
