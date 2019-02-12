@@ -9,3 +9,12 @@ input  { width: 400px;
 .list-item {
   color: red;
 }
+
+.tips.show {
+  display: block;
+   background: green; 
+}
+
+.tips.mute {
+display: none;  /* background: pink; */
+}

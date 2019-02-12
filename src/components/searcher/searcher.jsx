@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import axios from "axios";
-import SearchResult from "./searchResult";
+import Result from "./result";
 
 class Searcher extends Component {
   state = {
@@ -10,7 +10,8 @@ class Searcher extends Component {
     lastquery: "",
     minChars: 1,
     inputActive: false,
-    focusDD: false
+    suggestActive: false,
+    css: "tips mute"
   };
 
   async componentDidMount() {
@@ -19,29 +20,30 @@ class Searcher extends Component {
     await this.getSearch("testquery");
   }
 
-    extractDetails(arr) {
-        
-        let filtered = this.filterRegMatch(arr);
-        
-        return filtered.map( pos => {
-            const { id, title, release_date } = pos;
-            return { id: id, title: title, extra: release_date };
-        });
-    }
+  extractDetails(arr) {
+    let filtered = this.filterRegMatch(arr);
 
-    filterRegMatch(arr) {
-        let { lastquery } = this.state;
-        let regex = new RegExp(`\\b^${lastquery}`, 'gi');
-        let filtered = arr.filter(function (pos) {
-            return regex.test(pos.title);
-        });
-        return filtered;
-    }
+    return filtered.map(pos => {
+      const { id, title, release_date } = pos;
+      return { id: id, title: title, extra: release_date };
+    });
+  }
+
+  filterRegMatch(arr) {
+    let { lastquery } = this.state;
+    let regex = new RegExp(`\\b^${lastquery}`, "gi");
+    let filtered = arr.filter(function(pos) {
+      return regex.test(pos.title);
+    });
+    return filtered;
+  }
 
   async getSearch(query) {
     try {
-      let data = await this.getJson(this.url + "&query=" + query + "&include_adult=false&sort_by=title.asc");
-    
+      let data = await this.getJson(
+        this.url + "&query=" + query + "&include_adult=false&sort_by=title.asc"
+      );
+      document.addEventListener("mousedown", this.handleOutsideClick, false);
       const r =
         query === "testquery"
           ? { isLoaded: true }
@@ -70,14 +72,26 @@ class Searcher extends Component {
     throw new Error(res.status);
   }
 
+  handleOutsideClick = e => {
+    // ignore clicks on the component itself
+    if (this.node.contains(e.target)) {
+      return;
+    }
+    this.setState({
+      css: "tips mute",
+      suggestActive: false,
+      inputActive: false
+    });
+    console.log("outside");
+  };
+
   handleChange = e => {
     // console.log(document.getElementById("list-suggestions"))
-    if(e.target.value === ' ')
-    {
-        e.target.value = '';
-        return false;
+    if (e.target.value === " ") {
+      e.target.value = "";
+      return false;
     }
-    this.setState({ inputActive: true, lastquery: e.target.value });
+    this.setState({ lastquery: e.target.value });
 
     if (e.target.value.length >= this.state.minChars) {
       this.resetTimer(200, e.target.value);
@@ -88,10 +102,28 @@ class Searcher extends Component {
   };
 
   handleBlur = e => {
-    // document.getElementById("list-suggestions").focus();
-   
-    this.setState({ inputActive: false });
+    console.log(e.target.id, this.state.suggestActive);
+
+    if (e.target.id === "searchfield") {
+      console.log(document.activeElement, "xxx");
+      this.setState({ inputActive: false });
+    } else if (e.target.id === "list-suggestions") {
+      this.setState({ css: "tips mute", suggestActive: false });
+    }
   };
+
+  handleFocus = e => {
+    if (e.target.id === "searchfield")
+      this.setState({ css: "tips show", inputActive: true });
+    else if (e.target.id === "list-suggestions")
+      this.setState({ css: "tips show", suggestActive: true });
+  };
+
+  handleQueryPostSelect = s => {
+    
+    this.inpt.value = s;
+    this.setState({ lastquery: s });
+  }
 
   resetTimer(ms, inputString) {
     clearTimeout(this.searchTimeout);
@@ -104,23 +136,45 @@ class Searcher extends Component {
 
   render() {
     // console.log("** render() **");
-    const { error, result, lastquery, minChars, focusDD } = this.state;
+    const { error, result, lastquery, minChars } = this.state;
 
     if (error) {
       return <div>Sorry, search is not possible: {error.message}</div>;
     } else {
-    //   if (!this.state.inputActive) {
-    //     return (
-    //       <Fragment>
-    //         <input onFocus={this.handleChange} onBlur={this.handleBlur}  />
-    //       </Fragment>
-    //     );
-    //   }
+      //   if (!this.state.inputActive) {
+      //     return (
+      //       <Fragment>
+      //         <input onFocus={this.handleChange} onBlur={this.handleBlur}  />
+      //       </Fragment>
+      //     );
+      //   }
       return (
-        <Fragment>
-          <input onChange={this.handleChange} onBlur={this.handleBlur} />
-          <SearchResult query={lastquery} minChars={minChars} result={result} focus={focusDD}  />
-        </Fragment>
+        <div
+          ref={node => {
+            this.node = node;
+          }}
+        >
+          <input
+            ref={ inpt => {
+              this.inpt = inpt;
+            }}
+            autoComplete="off"
+            id="searchfield"
+            onFocus={this.handleFocus}
+            onChange={this.handleChange}
+            onBlur={this.handleBlur}
+          />
+          <div className={this.state.css}>
+            <Result
+              query={lastquery}
+              minChars={minChars}
+              result={result}
+              handleFocus={this.handleFocus}
+              handleBlur={this.handleBlur}
+              handleQueryPostSelect={this.handleQueryPostSelect}
+            />
+          </div>
+        </div>
       );
     }
   }
