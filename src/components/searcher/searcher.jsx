@@ -54,7 +54,7 @@ class Searcher extends Component {
         isLoaded: true,
         error
       });
-      console.log(
+      console.warning(
         "There has been a problem with your fetch operation: ",
         error.message
       );
@@ -82,7 +82,6 @@ class Searcher extends Component {
       suggestActive: false,
       inputActive: false
     });
-    console.log("outside searcher");
   };
 
   handleChange = e => {
@@ -102,7 +101,6 @@ class Searcher extends Component {
 
   handleBlur = e => {
     if (e.target.id === "searchfield") {
-      console.log(document.activeElement, "xxx");
       this.setState({ inputActive: false });
     } else if (e.target.id === "list-suggestions") {
       this.setState({ css: "tips mute", suggestActive: false });
@@ -117,16 +115,15 @@ class Searcher extends Component {
   };
 
   handleQueryPostSelect = movie => {
-    
     this.inpt.value = movie.title;
     this.setState({ lastquery: movie.title });
-    
+
     let date = new Date();
     const saveTime = date.getTime();
-    
-    let stampedMovie = {...movie, saveTime};
+
+    let stampedMovie = { ...movie, saveTime };
     this.props.onAddMovie(stampedMovie);
-  }
+  };
 
   resetTimer(ms, inputString) {
     clearTimeout(this.searchTimeout);
@@ -138,7 +135,6 @@ class Searcher extends Component {
   }
 
   render() {
-    // console.log("** render() **");
     const { error, result, lastquery, minChars } = this.state;
 
     if (error) {
@@ -151,7 +147,7 @@ class Searcher extends Component {
           }}
         >
           <input
-            ref={ inpt => {
+            ref={inpt => {
               this.inpt = inpt;
             }}
             autoComplete="off"
