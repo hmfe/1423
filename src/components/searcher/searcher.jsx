@@ -82,11 +82,10 @@ class Searcher extends Component {
       suggestActive: false,
       inputActive: false
     });
-    console.log("outside");
+    console.log("outside searcher");
   };
 
   handleChange = e => {
-    // console.log(document.getElementById("list-suggestions"))
     if (e.target.value === " ") {
       e.target.value = "";
       return false;
@@ -102,8 +101,6 @@ class Searcher extends Component {
   };
 
   handleBlur = e => {
-    console.log(e.target.id, this.state.suggestActive);
-
     if (e.target.id === "searchfield") {
       console.log(document.activeElement, "xxx");
       this.setState({ inputActive: false });
@@ -119,10 +116,16 @@ class Searcher extends Component {
       this.setState({ css: "tips show", suggestActive: true });
   };
 
-  handleQueryPostSelect = s => {
+  handleQueryPostSelect = movie => {
     
-    this.inpt.value = s;
-    this.setState({ lastquery: s });
+    this.inpt.value = movie.title;
+    this.setState({ lastquery: movie.title });
+    
+    let date = new Date();
+    const saveTime = date.getTime();
+    
+    let stampedMovie = {...movie, saveTime};
+    this.props.onAddMovie(stampedMovie);
   }
 
   resetTimer(ms, inputString) {
@@ -141,13 +144,6 @@ class Searcher extends Component {
     if (error) {
       return <div>Sorry, search is not possible: {error.message}</div>;
     } else {
-      //   if (!this.state.inputActive) {
-      //     return (
-      //       <Fragment>
-      //         <input onFocus={this.handleChange} onBlur={this.handleBlur}  />
-      //       </Fragment>
-      //     );
-      //   }
       return (
         <div
           ref={node => {
@@ -169,9 +165,9 @@ class Searcher extends Component {
               query={lastquery}
               minChars={minChars}
               result={result}
-              handleFocus={this.handleFocus}
-              handleBlur={this.handleBlur}
-              handleQueryPostSelect={this.handleQueryPostSelect}
+              onFocus={this.handleFocus}
+              onBlur={this.handleBlur}
+              onQueryPostSelect={this.handleQueryPostSelect}
             />
           </div>
         </div>

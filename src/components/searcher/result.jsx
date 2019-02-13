@@ -4,8 +4,12 @@ const None = () => <div>Sorry no matches..</div>;
 const MoreChars = () => <div>Morex chars plz...</div>;
 const Multi = props => {
   return props.result.map((movie, i) => (
-    <option className="list-item" key={movie.id} value={movie.id} onClick={(e)=>{props.handleQueryPostSelect(movie.title);
-    }}>
+    <option
+      className="list-item"
+      key={movie.id}
+      value={movie.id}
+      onClick={e => props.onQueryPostSelect(movie)}
+    >
       {movie.title} ({movie.extra})
     </option>
   ));
@@ -22,9 +26,9 @@ class Result extends Component {
       query,
       minChars,
       result,
-      handleBlur,
-      handleFocus,
-      handleQueryPostSelect
+      onBlur: handleBlur,
+      onFocus: handleFocus,
+      onQueryPostSelect: handleQueryPostSelect
     } = this.props;
 
     if (query.length < minChars) return <MoreChars />;
@@ -32,13 +36,8 @@ class Result extends Component {
       return !result.length ? (
         <None />
       ) : (
-        <Dropdown
-          result={result}
-          handleBlur={handleBlur}
-          handleFocus={handleFocus}
-          
-        >
-          <Multi result={result} handleQueryPostSelect={handleQueryPostSelect}/>
+        <Dropdown result={result} onBlur={handleBlur} onFocus={handleFocus}>
+          <Multi result={result} onQueryPostSelect={handleQueryPostSelect} />
         </Dropdown>
       );
     }
@@ -54,29 +53,22 @@ class Dropdown extends Component {
   };
 
   handleChange = e => {
-    console.log("handleChange");
-
     let upd = e.target.value;
-    // this.props.handleQueryPostSelect(e.target.children);
     this.setState({ lastSelect: upd });
   };
 
   handleBlur = e => {
-    console.log("handleBlur from child");
-    this.props.handleBlur(e);
+    this.props.onBlur(e);
     this.setState({ hasFocus: false });
   };
 
   handleFocus = e => {
-    console.log("handleFocus from child");
     e.target.focus();
-    this.props.handleFocus(e);
+    this.props.onFocus(e);
     this.setState({ hasFocus: true });
   };
 
   render() {
-    // console.log('*render*',this.props.result.length);
-
     return (
       <select
         size="8"

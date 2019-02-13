@@ -18,3 +18,18 @@ input  { width: 400px;
 .tips.mute {
 display: none;  /* background: pink; */
 }
+
+table.search-history {
+  border: 1px solid #ddd;
+  background: #ccc;
+  width: 400px;
+  border-spacing: 2;
+  border-collapse: separate;
+  
+}
+table.search-history td { background: white;} 
+
+button.delete{
+  background: rgb(160, 160, 80);
+  color: #fff;
+}
