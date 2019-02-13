@@ -10,6 +10,7 @@ const Multi = props => {
       key={movie.id}
       value={movie.id}
       onClick={e => props.onQueryPostSelect(movie)}
+      
     >
       {movie.title} ({movie.extra})
     </option>
@@ -37,7 +38,7 @@ class Result extends Component {
       return !result.length ? (
         <None />
       ) : (
-        <Dropdown result={result} onBlur={handleBlur} onFocus={handleFocus}>
+        <Dropdown result={result} onBlur={handleBlur} onFocus={handleFocus} onQueryPostSelect={handleQueryPostSelect}>
           <Multi result={result} onQueryPostSelect={handleQueryPostSelect} />
         </Dropdown>
       );

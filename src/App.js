@@ -12,7 +12,8 @@ class App extends Component {
   handleClearMovies = () => {
     this.setState({ searchHistory: [] });
   }
-  handleAddMovie = m => {
+  handleAddMovie = m => { console.log("---",m);
+  
     let arr = [m, ...this.state.searchHistory];
     this.setState({ searchHistory: arr });
   };

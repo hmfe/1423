@@ -14,7 +14,9 @@ export default function History(props) {
         <tr>
           <td colSpan="2">Search History</td>
           <td>
-            <button onClick={props.onClearMovies} className="clearAll">Clear All</button>
+            <button onClick={props.onClearMovies} className="clearAll">
+              Clear All
+            </button>
           </td>
         </tr>
       </thead>
