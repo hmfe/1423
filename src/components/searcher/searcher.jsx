@@ -44,6 +44,8 @@ class Searcher extends Component {
         this.url + "&query=" + query + "&include_adult=false&sort_by=title.asc"
       );
       document.addEventListener("mousedown", this.handleOutsideClick, false);
+        
+
       const r =
         query === "testquery"
           ? { isLoaded: true }
@@ -77,11 +79,7 @@ class Searcher extends Component {
     if (this.node.contains(e.target)) {
       return;
     }
-    this.setState({
-      css: "tips mute",
-      suggestActive: false,
-      inputActive: false
-    });
+    this.hideSuggestions();
   };
 
   handleChange = e => {
@@ -89,7 +87,7 @@ class Searcher extends Component {
       e.target.value = "";
       return false;
     }
-    this.setState({ lastquery: e.target.value });
+    this.setState({ lastquery: e.target.value, css: "tips show", inputActive: true });
 
     if (e.target.value.length >= this.state.minChars) {
       this.resetTimer(200, e.target.value);
@@ -123,7 +121,18 @@ class Searcher extends Component {
 
     let stampedMovie = { ...movie, saveTime };
     this.props.onAddMovie(stampedMovie);
+
+    this.inpt.focus();
+    this.hideSuggestions();
   };
+
+  hideSuggestions() {
+    this.setState({
+      css: "tips mute",
+      suggestActive: false,
+      inputActive: false
+    });
+  }
 
   resetTimer(ms, inputString) {
     clearTimeout(this.searchTimeout);
