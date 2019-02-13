@@ -2,14 +2,22 @@ import React from "react";
 
 export default function History(props) {
   const { length: total } = props.searchHistory;
-const e = (stamp) => {
+  const e = stamp => {
     let d = new Date(stamp);
-    return(d.toLocaleString())
-}
+    return d.toLocaleString();
+  };
   if (total === 0) return <div>no search history</div>;
 
   return (
     <table className="search-history">
+      <thead>
+        <tr>
+          <td colSpan="2">Search History</td>
+          <td>
+            <button onClick={props.onClearMovies} className="clearAll">Clear All</button>
+          </td>
+        </tr>
+      </thead>
       <tbody>
         {props.searchHistory.map(movie => (
           <tr key={movie.saveTime}>
@@ -17,9 +25,7 @@ const e = (stamp) => {
             <td>{e(movie.saveTime)}</td>
             <td>
               <button
-                onClick={() => {
-                  props.onDelMovie(movie);
-                }}
+                onClick={() => props.onDelMovie(movie)}
                 className="button delete"
               >
                 Delete

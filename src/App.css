@@ -1,4 +1,8 @@
-input  { width: 400px;
+body { margin: 20px; }
+input {
+  width: 400px;
+  border: 2px solid black;
+  font-size: 15px;
 }
 
 #list-suggestions {
@@ -6,30 +10,36 @@ input  { width: 400px;
   width: 400px;
   display: block;
 }
+
 .list-item {
   color: red;
 }
 
 .tips.show {
   display: block;
-   background: green; 
+  background: green;
 }
 
 .tips.mute {
-display: none;  /* background: pink; */
+  display: none;
+  /* background: pink; */
 }
 
 table.search-history {
+  margin-top: 30px;
   border: 1px solid #ddd;
   background: #ccc;
   width: 400px;
   border-spacing: 2;
   border-collapse: separate;
-  
-}
-table.search-history td { background: white;} 
 
-button.delete{
+}
+
+table.search-history td {
+  background: white;
+}
+
+button.delete {
   background: rgb(160, 160, 80);
   color: #fff;
 }

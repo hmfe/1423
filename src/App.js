@@ -9,6 +9,9 @@ class App extends Component {
     searchHistory: []
   };
 
+  handleClearMovies = () => {
+    this.setState({ searchHistory: [] });
+  }
   handleAddMovie = m => {
     let arr = [m, ...this.state.searchHistory];
     this.setState({ searchHistory: arr });
@@ -29,6 +32,7 @@ class App extends Component {
         <History
           searchHistory={this.state.searchHistory}
           onDelMovie={this.handleDelMovie}
+          onClearMovies={this.handleClearMovies}
         />
       </Fragment>
     );
