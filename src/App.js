@@ -14,9 +14,11 @@ class App extends Component {
     this.setState({ searchHistory: arr });
   };
   handleDelMovie = movieFromButton => {
+
     const keepMovies = this.state.searchHistory.filter(
-      m => m.id !== movieFromButton.id
+      m => (m.saveTime !== movieFromButton.saveTime)
     );
+
     this.setState({ searchHistory: keepMovies });
   };
 
