@@ -127,14 +127,14 @@ class Searcher extends Component {
 
     this.inpt.focus();
     this.hideSuggestions();
-    this.setState({ result:[] });
   };
 
   hideSuggestions() {
     this.setState({
       css: "tips mute",
       suggestActive: false,
-      inputActive: false
+      inputActive: false,
+      result:[]
     });
   }
 
