@@ -18,6 +18,7 @@ class Searcher extends Component {
     const apiKey = "c857fccf3354f1ca866dc08a04b4be34";
     this.url = "https://api.themoviedb.org/4/search/movie?api_key=" + apiKey;
     await this.getSearch("testquery");
+    document.addEventListener("mousedown", this.handleOutsideClick, false);
   }
 
   extractDetails(arr) {
@@ -43,7 +44,6 @@ class Searcher extends Component {
       let data = await this.getJson(
         this.url + "&query=" + query + "&include_adult=false&sort_by=title.asc"
       );
-      document.addEventListener("mousedown", this.handleOutsideClick, false);
 
       const r =
         query === "testquery"
@@ -127,6 +127,7 @@ class Searcher extends Component {
 
     this.inpt.focus();
     this.hideSuggestions();
+    this.setState({ result:[] });
   };
 
   hideSuggestions() {

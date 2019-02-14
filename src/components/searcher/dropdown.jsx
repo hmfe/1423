@@ -28,8 +28,7 @@ class Dropdown extends Component {
     this.setState({ hasFocus: false });
   };
 
-  handleFocus = e => { console.log('is focused');
-  
+  handleFocus = e => {
     e.target.focus();
     this.props.onFocus(e);
     this.setState({ hasFocus: true });
