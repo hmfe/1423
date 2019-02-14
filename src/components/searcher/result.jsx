@@ -19,11 +19,20 @@ const Multi = props => {
 
 class Result extends Component {
   shouldComponentUpdate(nextProps) {
+
+    // if(nextProps.query.length < this.props.minChars)
+    //   return false;
+
+    //   console.log('abc');
+      
+
     if (nextProps.result !== this.props.result) return true;
     else return false;
   }
 
   render() {
+    console.log('*rendering*');
+    
     let {
       query,
       minChars,

@@ -82,22 +82,19 @@ class Searcher extends Component {
   };
 
   handleChange = e => {
-    if (e.target.value === " ") {
+    if (e.target.value === " " || e.target.value === "") {
       e.target.value = "";
-      return false;
+      this.setState({ css: "tips mute"});
     }
+    else
+      this.setState({ css: "tips show"});
+
     this.setState({
       lastquery: e.target.value,
-      css: "tips show",
       inputActive: true
     });
 
-    if (e.target.value.length >= this.state.minChars) {
-      this.resetTimer(200, e.target.value);
-    } else {
-      clearTimeout(this.searchTimeout);
-      this.setState({ result: [] });
-    }
+    this.search(e, 100);
   };
 
   handleBlur = e => {
@@ -109,10 +106,15 @@ class Searcher extends Component {
   };
 
   handleFocus = e => {
-    if (e.target.id === "searchfield")
-      this.setState({ css: "tips show", inputActive: true });
+    if (e.target.id === "searchfield") {
+      this.setState({ inputActive: true });
+      if (this.state.lastquery.length)
+        this.setState({ css: "tips show"});
+    }
     else if (e.target.id === "list-suggestions")
       this.setState({ css: "tips show", suggestActive: true });
+
+    this.search(e,10);
   };
 
   handleQueryPostSelect = movie => {
@@ -129,12 +131,22 @@ class Searcher extends Component {
     this.hideSuggestions();
   };
 
+  search = (e, ms) => {
+    if (e.target.value.length >= this.state.minChars) {
+      this.resetTimer(ms, e.target.value);
+    }
+    else {
+      clearTimeout(this.searchTimeout);
+      this.setState({ result: [] });
+    }
+  }
+
   hideSuggestions() {
     this.setState({
       css: "tips mute",
       suggestActive: false,
       inputActive: false,
-      result:[]
+      result: []
     });
   }
 
@@ -147,7 +159,7 @@ class Searcher extends Component {
     }, ms);
   }
 
-  clearInput = () =>{
+  clearInput = () => {
     this.inpt.value = "";
     this.hideSuggestions();
     this.setState({ result: [] });
