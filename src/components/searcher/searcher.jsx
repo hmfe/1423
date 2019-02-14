@@ -44,7 +44,6 @@ class Searcher extends Component {
         this.url + "&query=" + query + "&include_adult=false&sort_by=title.asc"
       );
       document.addEventListener("mousedown", this.handleOutsideClick, false);
-        
 
       const r =
         query === "testquery"
@@ -87,7 +86,11 @@ class Searcher extends Component {
       e.target.value = "";
       return false;
     }
-    this.setState({ lastquery: e.target.value, css: "tips show", inputActive: true });
+    this.setState({
+      lastquery: e.target.value,
+      css: "tips show",
+      inputActive: true
+    });
 
     if (e.target.value.length >= this.state.minChars) {
       this.resetTimer(200, e.target.value);
@@ -143,6 +146,11 @@ class Searcher extends Component {
     }, ms);
   }
 
+  clearInput = () =>{
+    this.inpt.value = "";
+    this.hideSuggestions();
+    this.setState({ result: [] });
+  }
   render() {
     const { error, result, lastquery, minChars } = this.state;
 
@@ -155,16 +163,25 @@ class Searcher extends Component {
             this.node = node;
           }}
         >
-          <input
-            ref={inpt => {
-              this.inpt = inpt;
-            }}
-            autoComplete="off"
-            id="searchfield"
-            onFocus={this.handleFocus}
-            onChange={this.handleChange}
-            onBlur={this.handleBlur}
-          />
+          <div className="search">
+            <input
+              ref={inpt => {
+                this.inpt = inpt;
+              }}
+              placeholder="..."
+              type="text"
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck="false"
+              autoComplete="off"
+              id="searchfield"
+              onFocus={this.handleFocus}
+              onChange={this.handleChange}
+              onBlur={this.handleBlur}
+            />
+            <button onClick={this.clearInput} className="icon clear" />
+          </div>
+
           <div className={this.state.css}>
             <Result
               query={lastquery}
