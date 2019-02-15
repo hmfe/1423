@@ -9,7 +9,9 @@ const Multi = props => {
   
   return props.result.map((movie, i) => (
     <li
-      tabIndex="0"
+     // tabIndex={!i?"0":"-1"}
+      tabIndex={!i?"0":"-1"}
+      role="option"
       className="list-item"
       key={movie.id}
       value={movie.id}

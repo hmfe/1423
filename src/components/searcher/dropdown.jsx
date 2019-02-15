@@ -39,7 +39,8 @@ class Dropdown extends Component {
   render() {
     return (
       <ul
-        
+        tabIndex="-1"
+        role="listbox"
         id="list-suggestions"
         // onFocus={this.handleFocus}
         // onBlur={this.handleBlur}
