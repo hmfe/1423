@@ -4,16 +4,22 @@ import Dropdown from './dropdown';
 const None = () => <div>Sorry no matches..</div>;
 const MoreChars = () => <div>Morex chars plz...</div>;
 const Multi = props => {
+
+  // console.log(props);
+  
   return props.result.map((movie, i) => (
-    <option
+    <li
+      tabIndex="0"
       className="list-item"
       key={movie.id}
       value={movie.id}
-      onClick={e => props.onQueryPostSelect(movie)}
-      
+      onBlur={props.onBlur}
+      onFocus={props.onFocus}
+      pos={i}
+      // onClick={e => props.onQueryPostSelect(movie)}
     >
       {movie.title} ({movie.extra})
-    </option>
+    </li>
   ));
 };
 
@@ -31,7 +37,7 @@ class Result extends Component {
   }
 
   render() {
-    console.log('*rendering*');
+    console.log('*rendering*', this.props);
     
     let {
       query,
@@ -47,8 +53,8 @@ class Result extends Component {
       return !result.length ? (
         <None />
       ) : (
-        <Dropdown result={result} onBlur={handleBlur} onFocus={handleFocus} onQueryPostSelect={handleQueryPostSelect}>
-          <Multi result={result} onQueryPostSelect={handleQueryPostSelect} />
+        <Dropdown result={result} onQueryPostSelect={handleQueryPostSelect}>
+          <Multi result={result} onQueryPostSelect={handleQueryPostSelect} onFocus={handleFocus} onBlur={handleBlur} />
         </Dropdown>
       );
     }

@@ -35,17 +35,17 @@ body { margin: 20px; }
 
 #list-suggestions {
   border: solid 1px grey;
-  width: 100%;
+  width: 400px;
   display: block;
 }
 
 .list-item {
-  color: red;
+  color: black;
 }
 
 .tips.show {
   display: block;
-  background: green;
+  background: lightblue;
 }
 
 .tips.mute {

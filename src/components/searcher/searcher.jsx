@@ -78,16 +78,14 @@ class Searcher extends Component {
     if (this.node.contains(e.target)) {
       return;
     }
-    this.hideSuggestions();
+    // this.hideSuggestions();
   };
 
   handleChange = e => {
     if (e.target.value === " " || e.target.value === "") {
       e.target.value = "";
-      this.setState({ css: "tips mute"});
-    }
-    else
-      this.setState({ css: "tips show"});
+      this.setState({ css: "tips mute" });
+    } else this.setState({ css: "tips show" });
 
     this.setState({
       lastquery: e.target.value,
@@ -97,24 +95,44 @@ class Searcher extends Component {
     this.search(e, 100);
   };
 
-  handleBlur = e => {
-    if (e.target.id === "searchfield") {
+  handleBlur = e => { 
+    let pos = parseInt(e.target.getAttribute("pos"),10);
+    let tag = e.target.tagName;
+     if (tag === "INPUT" || tag === "BUTTON") {
+      
+       console.log('state.suggestActive:',this.state.suggestActive);
+       
       this.setState({ inputActive: false });
-    } else if (e.target.id === "list-suggestions") {
-      this.setState({ css: "tips mute", suggestActive: false });
+     }
+     else if (tag === "LI"){
+      this.setState({ suggestActive: false });
+       if(pos===this.state.result.length-1 && pos!==0) {
+      // this.setState({ suggestActive: false });
     }
+    else if(pos===0){console.log('handleBLUR other li');this.setState({ suggestActive:false})}
+  }
+
+
+  console.log('this.state.suggestActive' , this.state.suggestActive, '**' ,this.state.inputActive);
+  
+  if (!this.state.suggestActive && !this.state.inputActive)
+    console.log('trap');
+    
+    this.setState({  css: "tips mute" });
   };
 
   handleFocus = e => {
-    if (e.target.id === "searchfield") {
-      this.setState({ inputActive: true });
-      if (this.state.lastquery.length)
-        this.setState({ css: "tips show"});
-    }
-    else if (e.target.id === "list-suggestions")
-      this.setState({ css: "tips show", suggestActive: true });
 
-    this.search(e,10);
+    console.log('handleFocus: ',e.target.tagName);
+    
+    let tag = e.target.tagName;
+     if (tag === "INPUT" || tag === "BUTTON") {
+      this.setState({ inputActive: true });
+      if (this.state.lastquery.length) this.setState({ css: "tips show" });
+     } else if (tag === "LI") {
+       this.setState({ css: "tips show", suggestActive: true });
+     }
+    this.search(e, 10);
   };
 
   handleQueryPostSelect = movie => {
@@ -128,18 +146,19 @@ class Searcher extends Component {
     this.props.onAddMovie(stampedMovie);
 
     this.inpt.focus();
-    this.hideSuggestions();
+    // this.hideSuggestions();
   };
 
   search = (e, ms) => {
-    if (e.target.value.length >= this.state.minChars) {
-      this.resetTimer(ms, e.target.value);
-    }
-    else {
-      clearTimeout(this.searchTimeout);
-      this.setState({ result: [] });
-    }
-  }
+    // if (e.target.id !== "list-suggestions") {
+      if (e.target.value.length >= this.state.minChars) {
+        this.resetTimer(ms, e.target.value);
+      } else {
+        clearTimeout(this.searchTimeout);
+        // this.setState({ result: [] });
+      }
+    // }
+  };
 
   hideSuggestions() {
     this.setState({
@@ -163,7 +182,7 @@ class Searcher extends Component {
     this.inpt.value = "";
     this.hideSuggestions();
     this.setState({ result: [] });
-  }
+  };
   render() {
     const { error, result, lastquery, minChars } = this.state;
 
@@ -192,7 +211,7 @@ class Searcher extends Component {
               onChange={this.handleChange}
               onBlur={this.handleBlur}
             />
-            <button onClick={this.clearInput} className="icon clear" />
+            <button onClick={this.clearInput} onBlur={this.handleBlur} onFocus={this.handleFocus} className="icon clear" />
           </div>
 
           <div className={this.state.css}>
