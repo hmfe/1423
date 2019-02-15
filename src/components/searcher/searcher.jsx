@@ -109,7 +109,12 @@ class Searcher extends Component {
        if(pos===this.state.result.length-1 && pos!==0) {
       // this.setState({ suggestActive: false });
     }
-    else if(pos===0){console.log('handleBLUR LI POS 0');this.setState({ suggestActive:false})}
+    else if(pos===0){
+     
+      console.log('handleBLUR LI POS 0');this.setState({ suggestActive:false})
+      
+      
+    }
   }
 
 
@@ -131,7 +136,7 @@ class Searcher extends Component {
       if (this.state.lastquery.length) this.setState({ css: "tips show" });
      } else if (tag === "LI") {
       console.log('FOCUS ING LI');
-      
+     
 
        this.setState({ css: "tips show", suggestActive: true });
      }

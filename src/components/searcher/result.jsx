@@ -10,7 +10,7 @@ const Multi = props => {
   return props.result.map((movie, i) => (
     <li
      // tabIndex={!i?"0":"-1"}
-      tabIndex={!i?"0":"-1"}
+      tabIndex="0"
       role="option"
       className="list-item"
       key={movie.id}
