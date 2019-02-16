@@ -51,7 +51,7 @@ class Result extends Component {
       } else {
        
         return (
-          <Ul setResultListRef={setResultListRef} inputRef={inputRef}>
+          <Ul result={result} setResultListRef={setResultListRef} inputRef={inputRef} onQueryPostSelect={handleQueryPostSelect}>
             <Multi
               result={result}
               onQueryPostSelect={handleQueryPostSelect}

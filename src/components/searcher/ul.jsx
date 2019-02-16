@@ -10,12 +10,10 @@ class Ul extends Component {
     console.log(e.key);
 
     if (e.key === "Enter") {
-      // const movie = this.props.result.filter(
-        // m => parseInt(e.target.value, 10) === m.id
-      // );
-      // this.props.onQueryPostSelect(movie[0]);
-      // console.log(e.target.innerHTML );
-      
+       const movie = this.props.result.filter(
+        m => parseInt(e.target.value, 10) === m.id
+      );
+      this.props.onQueryPostSelect(movie[0]);
     }
     else if (e.target.tagName === "LI"){
       let activePos = parseInt(document.activeElement.getAttribute("pos"), 10);
@@ -32,7 +30,7 @@ class Ul extends Component {
             
             this.props.inputRef.focus();
             let l = this.props.inputRef.value.length;
-            console.log('leeeenght', l);
+            
             setTimeout(() => {
               this.props.inputRef.setSelectionRange(l, l);
             }, 1);
@@ -53,21 +51,6 @@ class Ul extends Component {
   componentDidMount() {
     this.props.setResultListRef(this._ul);
   }
-  // handleChange = e => {
-  //   let upd = e.target.value;
-  //   this.setState({ lastSelect: upd });
-  // };
-
-  // handleBlur = e => { console.log(e,'blr');
-  //   this.props.onBlur(e);
-  //   this.setState({ hasFocus: false });
-  // };
-
-  // handleFocus = e => {
-  //   e.target.focus();
-  //   this.props.onFocus(e);
-  //   this.setState({ hasFocus: true });
-  // };
 
   render() {
     return (
@@ -76,10 +59,6 @@ class Ul extends Component {
         tabIndex="-1"
         role="listbox"
         id="list-suggestions"
-        // onFocus={this.handleFocus}
-        // onBlur={this.handleBlur}
-        // value={this.state.lastSelect}
-        //  onChange={this.handleChange}
         onKeyDown={this.handleKeyDown}
       >
         {this.props.children}
