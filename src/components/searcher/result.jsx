@@ -1,15 +1,14 @@
 import React, { Component } from "react";
-import Dropdown from './dropdown';
+import Ul from "./ul";
 
 const None = () => <div>Sorry no matches..</div>;
 const MoreChars = () => <div>Morex chars plz...</div>;
 const Multi = props => {
-
-  // console.log(props);
-  
+ 
+  // this.props.onUpdateFirstResult(this);
   return props.result.map((movie, i) => (
     <li
-     // tabIndex={!i?"0":"-1"}
+      // tabIndex={!i?"0":"-1"}
       tabIndex="0"
       role="option"
       className="list-item"
@@ -18,7 +17,7 @@ const Multi = props => {
       onBlur={props.onBlur}
       onFocus={props.onFocus}
       pos={i}
-      // onClick={e => props.onQueryPostSelect(movie)}
+      onClick={e => props.onQueryPostSelect(movie)}
     >
       {movie.title} ({movie.extra})
     </li>
@@ -27,38 +26,41 @@ const Multi = props => {
 
 class Result extends Component {
   shouldComponentUpdate(nextProps) {
-
-    // if(nextProps.query.length < this.props.minChars)
-    //   return false;
-
-    //   console.log('abc');
-      
-
     if (nextProps.result !== this.props.result) return true;
     else return false;
   }
 
   render() {
-    console.log('*rendering*', this.props);
-    
+    console.log("*rendering*", this.props);
+
     let {
       query,
       minChars,
       result,
+      onUlRef:setResultListRef,
       onBlur: handleBlur,
       onFocus: handleFocus,
-      onQueryPostSelect: handleQueryPostSelect
+      onQueryPostSelect: handleQueryPostSelect,
+      inputRef
     } = this.props;
 
     if (query.length < minChars) return <MoreChars />;
     else {
-      return !result.length ? (
-        <None />
-      ) : (
-        <Dropdown result={result} onQueryPostSelect={handleQueryPostSelect}>
-          <Multi result={result} onQueryPostSelect={handleQueryPostSelect} onFocus={handleFocus} onBlur={handleBlur} />
-        </Dropdown>
-      );
+      if (!result.length) {
+        return <None />;
+      } else {
+       
+        return (
+          <Ul setResultListRef={setResultListRef} inputRef={inputRef}>
+            <Multi
+              result={result}
+              onQueryPostSelect={handleQueryPostSelect}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+            />
+          </Ul>
+        );
+      }
     }
   }
 }
