@@ -223,7 +223,7 @@ class Searcher extends Component {
               onClick={this.clearInput}
               onBlur={this.handleBlur}
               onFocus={this.handleFocus}
-              className="icon"
+              className="icon clear"
             >
               <IconCross />
             </button>

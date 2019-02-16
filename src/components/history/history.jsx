@@ -1,4 +1,5 @@
 import React from "react";
+import IconCross from "../svg/iconCross";
 
 export default function History(props) {
   const { length: total } = props.searchHistory;
@@ -28,9 +29,9 @@ export default function History(props) {
             <td>
               <button
                 onClick={() => props.onDelMovie(movie)}
-                className="button delete"
+                className="button icon delete"
               >
-                Delete
+                <IconCross />
               </button>
             </td>
           </tr>

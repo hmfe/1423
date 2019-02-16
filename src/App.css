@@ -65,19 +65,18 @@ input[type="text"] {
   width: 15px;
   height: 15px;
   position: relative;
-
   z-index: 1;
-  right: 35px;
-  top: 0;
-  bottom: 0;
-  margin: auto;
   padding: 0px;
   text-align: center;
-  color: white;
   font-weight: normal;
-  font-size: 12px;
+  font-size: 0;
   cursor: pointer;
   border:none;
+}
+.icon.clear {
+  right: 20px;
+  top: 1px;
+  margin: auto;
 }
 
 
@@ -121,5 +120,7 @@ table.search-history td {
 
 button.delete {
   background: rgb(160, 160, 80);
-  color: #fff;
+  width: 32px;
+  height: 32px;
+  padding: 0;
 }
