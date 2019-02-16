@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Result from "./result";
+import IconCross from "../svg/iconCross";
 
 class Searcher extends Component {
   state = {
@@ -110,7 +111,6 @@ class Searcher extends Component {
       }
     }
 
-
     if (!this.state.suggestActive && !this.state.inputActive)
       console.log("trap");
 
@@ -119,7 +119,7 @@ class Searcher extends Component {
   handleKeyDown = e => {
     if (e.key === "ArrowDown" && this.state.result.length) {
       console.log(this.resultList.firstChild);
-      
+
       this.resultList.firstChild.focus();
     }
   };
@@ -129,12 +129,12 @@ class Searcher extends Component {
 
     let tag = e.target.tagName;
     if (tag === "INPUT" || tag === "BUTTON") {
-      console.log('!!!!', this.state.lastquery);
+      console.log("!!!!", this.state.lastquery);
       this.setState({ inputActive: true });
       if (this.state.lastquery.length) this.setState({ css: "tips show" });
     } else if (tag === "LI") {
       console.log("FOCUS ING LI", e.target.innerHTML);
-      
+
       e.target.setAttribute("aria-selected", true);
       this._input.value = e.target.innerHTML;
       this.setState({ css: "tips show", suggestActive: true });
@@ -146,7 +146,6 @@ class Searcher extends Component {
     this.resultList = ul;
   };
   handleQueryPostSelect = movie => {
-    // this._input.value = movie.title;
     this._input.value = "";
     this.setState({ lastquery: movie.title });
 
@@ -156,21 +155,16 @@ class Searcher extends Component {
     let stampedMovie = { ...movie, saveTime };
     this.props.onAddMovie(stampedMovie);
 
-    
-    // this._input.focus();
-    // this.hideSuggestions();
     this.clearInput();
   };
 
   search = (e, ms) => {
-    // if (e.target.id !== "list-suggestions") {
     if (e.target.value.length >= this.state.minChars) {
       this.resetTimer(ms, e.target.value);
     } else {
       clearTimeout(this.searchTimeout);
       // this.setState({ result: [] });
     }
-    // }
   };
 
   hideSuggestions() {
@@ -194,7 +188,7 @@ class Searcher extends Component {
   clearInput = () => {
     this._input.value = "";
     this.hideSuggestions();
-    this.setState({ result: [], lastquery:"" });
+    this.setState({ result: [], lastquery: "" });
   };
   render() {
     const { error, result, lastquery, minChars } = this.state;
@@ -229,8 +223,10 @@ class Searcher extends Component {
               onClick={this.clearInput}
               onBlur={this.handleBlur}
               onFocus={this.handleFocus}
-              className="icon clear"
-            />
+              className="icon"
+            >
+              <IconCross />
+            </button>
           </div>
 
           <div className={this.state.css}>

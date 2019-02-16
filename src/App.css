@@ -1,5 +1,46 @@
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ^^^^^ */
+/* reset */
+
+
 body {
-  margin: 20px;
+  margin: 0;
+  padding: 0;
   font-size: 16px;
 }
 
@@ -11,43 +52,47 @@ input[type="text"] {
   position: relative;
   padding: 20px;
   background: #ccc;
+  width: 300px;
 }
 
 #searchfield {
-  width: 100%;
   border: 2px solid black;
   font-size: 15px;
 }
 
 
-.icon.clear {
+.icon {
   width: 15px;
   height: 15px;
-  position: absolute;
-  background-color: #FA9595;
+  position: relative;
+
   z-index: 1;
   right: 35px;
   top: 0;
   bottom: 0;
   margin: auto;
-  padding: 2px;
-  border-radius: 50%;
+  padding: 0px;
   text-align: center;
   color: white;
   font-weight: normal;
   font-size: 12px;
   cursor: pointer;
+  border:none;
 }
 
 
 #list-suggestions {
   border: solid 1px grey;
-  width: 400px;
+  width: 300px;
   display: block;
 }
 
 .list-item {
   color: black;
+}
+
+.tips {
+  width: 300px;
 }
 
 .tips.show {
@@ -64,7 +109,7 @@ table.search-history {
   margin-top: 30px;
   border: 1px solid #ddd;
   background: #ccc;
-  width: 400px;
+  width: 300px;
   border-spacing: 2;
   border-collapse: separate;
 
