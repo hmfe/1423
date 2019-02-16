@@ -45,14 +45,18 @@ body {
 }
 
 input[type="text"] {
+  width: 100%;
   font-size: inherit;
+}
+
+.search-container
+{
+padding: 20px;
 }
 
 .search {
   position: relative;
-  padding: 20px;
-  background: #ccc;
-  width: 300px;
+  width: 100%;
 }
 
 #searchfield {
@@ -64,7 +68,6 @@ input[type="text"] {
 .icon {
   width: 15px;
   height: 15px;
-  position: relative;
   z-index: 1;
   padding: 0px;
   text-align: center;
@@ -72,17 +75,17 @@ input[type="text"] {
   font-size: 0;
   cursor: pointer;
   border:none;
+  background-color: initial;
 }
-.icon.clear {
-  right: 20px;
-  top: 1px;
-  margin: auto;
+.cross {
+  position: absolute;
+  right:5px;
+  top:5px;
 }
 
 
 #list-suggestions {
   border: solid 1px grey;
-  width: 300px;
   display: block;
 }
 
@@ -91,7 +94,7 @@ input[type="text"] {
 }
 
 .tips {
-  width: 300px;
+  width: 100%;
 }
 
 .tips.show {

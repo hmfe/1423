@@ -197,7 +197,7 @@ class Searcher extends Component {
       return <div>Sorry, search is not possible: {error.message}</div>;
     } else {
       return (
-        <div
+        <div className="search-container"
           ref={node => {
             this.node = node;
           }}
@@ -219,17 +219,17 @@ class Searcher extends Component {
               onBlur={this.handleBlur}
               onKeyDown={this.handleKeyDown}
             />
-            <button
+            
+              <button
               onClick={this.clearInput}
               onBlur={this.handleBlur}
               onFocus={this.handleFocus}
-              className="icon clear"
+              className="icon cross"
             >
               <IconCross />
             </button>
-          </div>
-
-          <div className={this.state.css}>
+            
+            <div className={this.state.css}>
             <Result
               inputRef={this._input}
               query={lastquery}
@@ -241,6 +241,9 @@ class Searcher extends Component {
               onUlRef={this.setResultListRef}
             />
           </div>
+          </div>
+
+          
         </div>
       );
     }
