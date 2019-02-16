@@ -44,9 +44,9 @@ body {
   font-size: 16px;
 }
 
-input[type="text"] {
+input, input:active, input:focus, input:focus-within, input:hover, input:visited {
+  font-size: 16px!important;
   width: 100%;
-  font-size: inherit;
 }
 
 .search-container
@@ -126,9 +126,7 @@ table.search-history {
 table.search-history thead {
   border: 1px solid black;
 }
-table.search-history tbody {
-  line-height: 0;
-}
+
 
 .clear-all {
   text-align: center;
