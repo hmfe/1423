@@ -51,7 +51,7 @@ input[type="text"] {
 
 .search-container
 {
-padding: 20px;
+  padding: 20px;
 }
 
 .search {
@@ -60,10 +60,18 @@ padding: 20px;
 }
 
 #searchfield {
-  border: 2px solid black;
+  border: 1px solid #555;
   font-size: 15px;
+  padding: 10px;
 }
 
+#search-result
+{
+  margin-top: 84px;
+  padding: 0 20px;
+  position: absolute;
+  width: 100%;
+}
 
 .icon {
   width: 15px;
@@ -79,8 +87,8 @@ padding: 20px;
 }
 .cross {
   position: absolute;
-  right:5px;
-  top:5px;
+  right:10px;
+  top:12px;
 }
 
 
@@ -99,7 +107,7 @@ padding: 20px;
 
 .tips.show {
   display: block;
-  background: lightblue;
+  background: #fff;
 }
 
 .tips.mute {
@@ -108,21 +116,32 @@ padding: 20px;
 }
 
 table.search-history {
-  margin-top: 30px;
-  border: 1px solid #ddd;
-  background: #ccc;
-  width: 300px;
-  border-spacing: 2;
+  border: 1px solid #555;
+  background: #ddd;
+  border-spacing: 8px;
   border-collapse: separate;
-
+  width:100%
 }
 
-table.search-history td {
-  background: white;
+table.search-history thead {
+  border: 1px solid black;
+}
+table.search-history tbody {
+  line-height: 0;
 }
 
+.clear-all {
+  text-align: center;
+}
+.clear-all a {
+  color: black;
+}
+
+td.time-stamp {text-align: right}
+td.delete {
+  text-align: center;
+}
 button.delete {
-  background: rgb(160, 160, 80);
   width: 32px;
   height: 32px;
   padding: 0;

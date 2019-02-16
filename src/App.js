@@ -9,7 +9,8 @@ class App extends Component {
     searchHistory: []
   };
 
-  handleClearMovies = () => {
+  handleClearMovies = (e) => {
+    e.preventDefault();
     this.setState({ searchHistory: [] });
   }
   handleAddMovie = m => {
@@ -29,12 +30,14 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <Searcher onAddMovie={this.handleAddMovie} />
+        
         <History
           searchHistory={this.state.searchHistory}
           onDelMovie={this.handleDelMovie}
           onClearMovies={this.handleClearMovies}
         />
+
+        <Searcher onAddMovie={this.handleAddMovie} />
       </Fragment>
     );
   }

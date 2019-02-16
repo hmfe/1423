@@ -207,7 +207,7 @@ class Searcher extends Component {
               ref={el => {
                 this._input = el;
               }}
-              placeholder="..."
+              placeholder="Look for a movie..."
               type="text"
               autoCorrect="off"
               autoCapitalize="off"
