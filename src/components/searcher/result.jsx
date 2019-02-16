@@ -8,6 +8,7 @@ const Multi = props => {
   // this.props.onUpdateFirstResult(this);
   return props.result.map((movie, i) => (
     <li
+      aria-selected="false"
       // tabIndex={!i?"0":"-1"}
       tabIndex="0"
       role="option"

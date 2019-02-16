@@ -100,6 +100,7 @@ class Searcher extends Component {
     if (tag === "INPUT" || tag === "BUTTON") {
       this.setState({ inputActive: false });
     } else if (tag === "LI") {
+      e.target.setAttribute("aria-selected", false);
       this.setState({ suggestActive: false });
       if (pos === this.state.result.length - 1 && pos !== 0) {
         // this.setState({ suggestActive: false });
@@ -116,7 +117,9 @@ class Searcher extends Component {
     //  this.setState({  css: "tips mute" });
   };
   handleKeyDown = e => {
-    if (e.key == "ArrowDown" && this.state.result.length) {
+    if (e.key === "ArrowDown" && this.state.result.length) {
+      console.log(this.resultList.firstChild);
+      
       this.resultList.firstChild.focus();
     }
   };
@@ -131,6 +134,8 @@ class Searcher extends Component {
       if (this.state.lastquery.length) this.setState({ css: "tips show" });
     } else if (tag === "LI") {
       console.log("FOCUS ING LI", e.target.innerHTML);
+      
+      e.target.setAttribute("aria-selected", true);
       this._input.value = e.target.innerHTML;
       this.setState({ css: "tips show", suggestActive: true });
     }
@@ -192,7 +197,7 @@ class Searcher extends Component {
     this.setState({ result: [], lastquery:"" });
   };
   render() {
-    const { error, result, lastquery, minChars, firstResult } = this.state;
+    const { error, result, lastquery, minChars } = this.state;
 
     if (error) {
       return <div>Sorry, search is not possible: {error.message}</div>;
