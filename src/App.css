@@ -1,0 +1,183 @@
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ^^^^^ */
+/* reset */
+
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+
+input,
+input:active,
+input:focus,
+input:focus-within,
+input:hover,
+input:visited {
+  font-size: 16px !important;
+  width: 100%;
+}
+
+.search-container {
+  padding: 20px;
+}
+
+.search {
+  position: relative;
+  width: 100%;
+}
+
+#searchfield {
+  border: 1px solid #555;
+  font-size: 15px;
+  padding: 10px;
+}
+
+#search-result {
+  margin-top: 84px;
+  padding: 0 20px;
+  position: absolute;
+  width: 100%;
+}
+
+.icon {
+  width: 15px;
+  height: 15px;
+  z-index: 1;
+  padding: 0px;
+  text-align: center;
+  font-weight: normal;
+  font-size: 0;
+  cursor: pointer;
+  border: none;
+  background-color: initial;
+}
+
+.cross {
+  position: absolute;
+  right: 10px;
+  top: 12px;
+}
+
+
+#list-suggestions {
+  display: block;
+}
+
+.list-item {
+  color: black;
+  padding: 5px 10px;
+
+}
+
+.list-item:focus {
+  color: #fff;
+  background: grey;
+  outline: none;
+}
+
+.no-result {
+  padding: 10px;
+  color: #888;
+}
+
+.tips {
+  width: 100%;
+  position: absolute;
+  margin-top: -1px;
+  background: #fff;
+  border: 1px solid grey;
+  box-shadow: 0px 2px 3px 0px #8888887a;
+}
+
+.tips.show {
+  display: block;
+}
+
+.tips.mute {
+  display: none;
+  /* background: pink; */
+}
+
+table.search-history {
+  border-collapse: collapse;
+  width: 100%
+}
+
+table.search-history thead td {
+  padding: 10px;
+  font-size: 20px;
+}
+
+table.search-history tbody td {
+  padding: 5px 10px;
+}
+
+.clear-all {
+  text-align: center;
+}
+
+.clear-all a {
+  color: black;
+  font-size: 14px;
+}
+
+thead tr {
+  border-bottom: 1px solid grey;
+}
+
+tbody tr {
+  border-bottom: 1px solid #ccc;
+}
+
+td.time-stamp {
+  text-align: right;
+  font-size: 10px;
+}
+
+
+td.delete {
+  text-align: center;
+}
+
+button.delete {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+}
