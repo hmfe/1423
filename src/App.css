@@ -93,21 +93,35 @@ input, input:active, input:focus, input:focus-within, input:hover, input:visited
 
 
 #list-suggestions {
-  border: solid 1px grey;
   display: block;
 }
 
 .list-item {
   color: black;
+  padding: 5px 10px;
+
+}
+.list-item:focus {
+  color: #fff;
+  background: grey;
+  outline: none;
+}
+.no-result{
+  padding:10px;
+  color: #888;
 }
 
 .tips {
   width: 100%;
+  position: absolute;
+  margin-top: -1px;
+  background: #fff;
+  border:1px solid grey;
+  box-shadow: 0px 2px 3px 0px #8888887a;
 }
 
 .tips.show {
   display: block;
-  background: #fff;
 }
 
 .tips.mute {

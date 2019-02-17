@@ -194,7 +194,7 @@ class Searcher extends Component {
     const { error, result, lastquery, minChars } = this.state;
 
     if (error) {
-      return <div>Sorry, search is not possible: {error.message}</div>;
+      return <div className="sorry">Sorry, search is not possible: {error.message}</div>;
     } else {
       return (
         <div className="search-container"

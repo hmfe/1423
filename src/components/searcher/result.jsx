@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Ul from "./ul";
 
-const None = () => <div>Sorry no matches..</div>;
-const MoreChars = () => <div>Morex chars plz...</div>;
+const None = () => <div className="no-result">Sorry no matches..</div>;
+const MoreChars = () => <div className="no-result">Morex chars plz...</div>;
 const Multi = props => {
  
   // this.props.onUpdateFirstResult(this);
