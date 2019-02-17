@@ -16,7 +16,7 @@ export default function History(props) {
         <tr>
           <td colSpan="2">Search History</td>
           <td className="clear-all">
-            <a href="#" onClick={props.onClearMovies}>Clear All</a>
+            <a href="#/" onClick={props.onClearMovies}>Clear All</a>
           </td>
         </tr>
       </thead>
