@@ -4,11 +4,11 @@ import Ul from "./ul";
 const None = () => <div className="no-result">Sorry no matches..</div>;
 const MoreChars = () => <div className="no-result">Morex chars plz...</div>;
 const Multi = props => {
-  // this.props.onUpdateFirstResult(this);
+  let query = props.inputRef.value;
+  
   return props.result.map((movie, i) => (
     <li
       aria-selected="false"
-      // tabIndex={!i?"0":"-1"}
       tabIndex="0"
       role="option"
       className="list-item"
@@ -16,11 +16,13 @@ const Multi = props => {
       value={movie.id}
       onBlur={props.onBlur}
       onFocus={props.onFocus}
-      pos={i}
+      data-pos={i}
+      data-title ={movie.title}
       onClick={e => props.onQueryPostSelect(movie)}
     >
-      {movie.title} ({movie.extra})
+      <b>{movie.title.substring(0,query.length)}</b>{movie.title.substring(query.length)} ({movie.extra})
     </li>
+
   ));
 };
 
@@ -55,6 +57,7 @@ class Result extends Component {
             onQueryPostSelect={handleQueryPostSelect}
           >
             <Multi
+              inputRef={inputRef}
               result={result}
               onQueryPostSelect={handleQueryPostSelect}
               onFocus={handleFocus}

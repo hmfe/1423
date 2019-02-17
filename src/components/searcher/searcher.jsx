@@ -96,7 +96,7 @@ class Searcher extends Component {
   };
 
   handleBlur = e => {
-    let pos = parseInt(e.target.getAttribute("pos"), 10);
+    let pos = parseInt(e.target.getAttribute("data-pos"), 10);
     let tag = e.target.tagName;
     if (tag === "INPUT" || tag === "BUTTON") {
       this.setState({ inputActive: false });
@@ -127,7 +127,8 @@ class Searcher extends Component {
       if (this.state.lastquery.length) this.setState({ css: "tips show" });
     } else if (tag === "LI") {
       e.target.setAttribute("aria-selected", true);
-      this._input.value = e.target.innerHTML;
+      
+      this._input.value = e.target.getAttribute("data-title");
       this.setState({ css: "tips show", suggestActive: true });
     }
     this.search(e, 10);
