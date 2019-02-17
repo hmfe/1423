@@ -163,7 +163,6 @@ class Searcher extends Component {
       this.resetTimer(ms, e.target.value);
     } else {
       clearTimeout(this.searchTimeout);
-      // this.setState({ result: [] });
     }
   };
 

@@ -44,13 +44,17 @@ body {
   font-size: 16px;
 }
 
-input, input:active, input:focus, input:focus-within, input:hover, input:visited {
-  font-size: 16px!important;
+input,
+input:active,
+input:focus,
+input:focus-within,
+input:hover,
+input:visited {
+  font-size: 16px !important;
   width: 100%;
 }
 
-.search-container
-{
+.search-container {
   padding: 20px;
 }
 
@@ -65,8 +69,7 @@ input, input:active, input:focus, input:focus-within, input:hover, input:visited
   padding: 10px;
 }
 
-#search-result
-{
+#search-result {
   margin-top: 84px;
   padding: 0 20px;
   position: absolute;
@@ -82,13 +85,14 @@ input, input:active, input:focus, input:focus-within, input:hover, input:visited
   font-weight: normal;
   font-size: 0;
   cursor: pointer;
-  border:none;
+  border: none;
   background-color: initial;
 }
+
 .cross {
   position: absolute;
-  right:10px;
-  top:12px;
+  right: 10px;
+  top: 12px;
 }
 
 
@@ -101,13 +105,15 @@ input, input:active, input:focus, input:focus-within, input:hover, input:visited
   padding: 5px 10px;
 
 }
+
 .list-item:focus {
   color: #fff;
   background: grey;
   outline: none;
 }
-.no-result{
-  padding:10px;
+
+.no-result {
+  padding: 10px;
   color: #888;
 }
 
@@ -116,7 +122,7 @@ input, input:active, input:focus, input:focus-within, input:hover, input:visited
   position: absolute;
   margin-top: -1px;
   background: #fff;
-  border:1px solid grey;
+  border: 1px solid grey;
   box-shadow: 0px 2px 3px 0px #8888887a;
 }
 
@@ -130,29 +136,46 @@ input, input:active, input:focus, input:focus-within, input:hover, input:visited
 }
 
 table.search-history {
-  border: 1px solid #555;
-  background: #ddd;
-  border-spacing: 8px;
-  border-collapse: separate;
-  width:100%
+  border-collapse: collapse;
+  width: 100%
 }
 
-table.search-history thead {
-  border: 1px solid black;
+table.search-history thead td {
+  padding: 10px;
+  font-size: 20px;
 }
 
+table.search-history tbody td {
+  padding: 5px 10px;
+}
 
 .clear-all {
   text-align: center;
 }
+
 .clear-all a {
   color: black;
+  font-size: 14px;
 }
 
-td.time-stamp {text-align: right}
+thead tr {
+  border-bottom: 1px solid grey;
+}
+
+tbody tr {
+  border-bottom: 1px solid #ccc;
+}
+
+td.time-stamp {
+  text-align: right;
+  font-size: 10px;
+}
+
+
 td.delete {
   text-align: center;
 }
+
 button.delete {
   width: 32px;
   height: 32px;
