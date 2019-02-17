@@ -1,4 +1,7 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is to answer part three of the test, focusing on a React-solution.
+Semantics and HTML knowledge has hopefully been covered by other projects at H%M. :)
+
+
 
 ## Available Scripts
 
