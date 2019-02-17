@@ -1,5 +1,5 @@
 This is to answer part three of the test, focusing on a React-solution.
-Semantics and HTML knowledge has hopefully been covered by other projects at H%M. :)
+Semantics and HTML knowledge has hopefully been covered by other projects at HM. :)
 
 
 
