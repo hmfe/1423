@@ -7,8 +7,6 @@ class Ul extends Component {
   };
 
   handleKeyDown = e => {
-    console.log(e.key);
-
     if (e.key === "Enter") {
        const movie = this.props.result.filter(
         m => parseInt(e.target.value, 10) === m.id

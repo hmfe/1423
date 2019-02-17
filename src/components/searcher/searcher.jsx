@@ -106,19 +106,13 @@ class Searcher extends Component {
       if (pos === this.state.result.length - 1 && pos !== 0) {
         // this.setState({ suggestActive: false });
       } else if (pos === 0) {
-        console.log("handleBLUR LI POS 0");
         this.setState({ suggestActive: false });
       }
     }
 
-    if (!this.state.suggestActive && !this.state.inputActive)
-      console.log("trap");
-
-    //  this.setState({  css: "tips mute" });
   };
   handleKeyDown = e => {
     if (e.key === "ArrowDown" && this.state.result.length) {
-      console.log(this.resultList.firstChild);
 
       this.resultList.firstChild.focus();
     }
@@ -129,12 +123,9 @@ class Searcher extends Component {
 
     let tag = e.target.tagName;
     if (tag === "INPUT" || tag === "BUTTON") {
-      console.log("!!!!", this.state.lastquery);
       this.setState({ inputActive: true });
       if (this.state.lastquery.length) this.setState({ css: "tips show" });
     } else if (tag === "LI") {
-      console.log("FOCUS ING LI", e.target.innerHTML);
-
       e.target.setAttribute("aria-selected", true);
       this._input.value = e.target.innerHTML;
       this.setState({ css: "tips show", suggestActive: true });
